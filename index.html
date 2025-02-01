@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Família Legend</title>
+    <link rel="icon" href="icons/favicon/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="page-header">
+        <h2 id="current-radio"> </h2>
+    </header>
+    <main>
+        <!-- Seção do Player -->
+        <section id="radio-player">
+            <div id="player-container">
+                <audio id="player" controls></audio>
+                <div id="player-controls">
+                    <button id="play-pause" class="player-button"><i class="fas fa-play"></i></button>
+                    <button id="stop" class="player-button"><i class="fas fa-stop"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Instruções de Uso com Expansão -->
+        <section id="usage-instructions">
+            <div class="instructions-box">
+                <button id="toggle-instructions">Como o MixLegend™ Funciona? (Clique para expandir)</button>
+                <div id="instructions-content" style="display: none;">
+                    <p style="margin-bottom: 20px;">1 - Clique em uma rádio no menu de rádios disponíveis abaixo.</p>
+                    <p style="margin-bottom: 20px;">2 - Aguarde alguns segundos até que a música comece a tocar automaticamente no player.</p>
+                    <p style="margin-bottom: 20px;">3 - Você pode controlar o volume da música através do menu suspenso na lateral do app.</p>
+                    <p style="margin-bottom: 35px;">4 - Na parte inferior do app você encontra a seção de Salas do Avakin, basta clicar em uma que você será redirecionado para a sala correspondente no jogo.</p>
+                    <p><strong>Observações:</strong></p>
+                    <p style="margin-bottom: 20px;">
+                        - Se o rádio parar de tocar após algum tempo, é porquê seu dispositivo está com recursos como Economia de energia/bateria ativados. Se seu aparelho suporta navegador em janela pop-up com jogos abertos, ou possui recursos de "gametime", abra o site <a href="https://familialegend.vercel.app" target="_blank" style="color: #00BFFF;">https://familialegend.vercel.app</a> diretamente do navegador em pop-up.
+                    </p>
+                    <p>
+                        - Esse serviço é mantido exclusivamente pela Família Legend, através das licenças GPL 3.0 e Creative Commons BY-NC. Se estiver sendo utilizado por outras famílias, entidades ou organizações: Reporte no instagram: <a href="https://www.instagram.com/familialegendoficial" target="_blank" style="color: #00BFFF;">@familialegendoficial</a>
+                    </p>
+                </div>
+            </div>
+        </section>        
+
+        <!-- Seção de Rádios Disponíveis -->
+        <section id="radio-list">
+            <h3>Rádios Disponíveis</h3>
+            <input type="text" id="search-bar" placeholder="Pesquisar rádios">
+            <ul id="stations" class="station-list"></ul>
+        </section>
+        
+        <!-- Seção de Links Diversos -->
+        <section id="additional-links">
+            <h3>Salas do Avakin: (em teste)</h3>
+            <ul id="links-list" class="links-list"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 MixLegend™ by Família Legend, todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Menu de Controle de Volume -->
+    <div id="control-menu">
+        <button id="volume-up" class="control-button"><i class="fas fa-volume-up"></i></button>
+        <button id="volume-down" class="control-button"><i class="fas fa-volume-down"></i></button>
+        <button id="pause" class="control-button"><i class="fas fa-pause"></i></button>
+        <button id="stop-control" class="control-button"><i class="fas fa-stop"></i></button>
+        <button id="theme-toggle">🌙</button>
+    </div>
+
+    <div id="volume-popup"></div>
+
+    <script src="stations.js"></script>
+    <script src="links.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
