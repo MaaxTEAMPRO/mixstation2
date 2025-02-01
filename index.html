@@ -10,8 +10,14 @@
 </head>
 <body>
     <header id="page-header">
-        <h2 id="current-radio"> </h2>
+        <button class="menu-toggle">☰</button>
+        <h2 id="current-radio"></h2>
+        <div class="dropdown-menu">
+            <button id="set-wallpaper">Wallpaper</button>
+            <button id="set-solid-theme">Tema Sólido</button>
+        </div>
     </header>
+
     <main>
         <!-- Seção do Player -->
         <section id="radio-player">
@@ -42,7 +48,7 @@
                     </p>
                 </div>
             </div>
-        </section>        
+        </section>
 
         <!-- Seção de Rádios Disponíveis -->
         <section id="radio-list">
@@ -57,6 +63,7 @@
             <ul id="links-list" class="links-list"></ul>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2025 MixStation2™ by MaaxRadio, todos os direitos reservados.</p>
     </footer>
