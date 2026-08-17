@@ -2,85 +2,152 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MixStation2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MixStation — ouça suas webradios favoritas gratuitamente e pelo navegador.">
+    <meta name="theme-color" content="#121212">
+    <meta property="og:title" content="MixStation">
+    <meta property="og:description" content="Webradios grátis no navegador.">
+    <meta property="og:type" content="website">
+    <title>MixStation</title>
     <link rel="icon" href="icons/favicon/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header id="page-header">
-        <button class="menu-toggle">☰</button>
-        <h2 id="current-radio"></h2>
-        <div class="dropdown-menu">
-            <button id="set-wallpaper">Wallpaper</button>
-            <button id="set-solid-theme">Tema Sólido</button>
+        <div class="header-inner">
+            <div class="brand">
+                <img src="icons/favicon/favicon.png" alt="MixStation" class="brand-logo" loading="lazy">
+                <div class="brand-text">
+                    <span class="brand-title">MixStation</span>
+                    <span id="current-radio">Selecione uma rádio</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <select id="theme-select" aria-label="Escolher tema" title="Tema do site">
+                    <option value="default">🎨 Tema</option>
+                    <option value="oceano">Oceano</option>
+                    <option value="floresta">Floresta</option>
+                    <option value="neon">Neon</option>
+                    <option value="pioneer">Pioneer Dolphin</option>
+                </select>
+                <button id="drive-mode-button" class="drive-dash-btn" aria-label="Abrir modo direção">
+                    <i class="fas fa-car" aria-hidden="true"></i>
+                    <span>Modo Direção</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <main>
-        <!-- Seção do Player -->
-        <section id="radio-player">
+        <section id="radio-player" aria-label="Player de rádio">
             <div id="player-container">
-                <audio id="player" controls></audio>
-                <div id="player-controls">
-                    <button id="play-pause" class="player-button"><i class="fas fa-play"></i></button>
-                    <button id="stop" class="player-button"><i class="fas fa-stop"></i></button>
+                <audio id="player" preload="none"></audio>
+                <div id="now-playing">
+                    <img id="current-icon" src="" alt="" width="56" height="56">
+                    <div id="now-playing-text">
+                        <span id="now-playing-label">Tocando agora</span>
+                        <strong id="current-station">Nenhuma rádio selecionada</strong>
+                    </div>
+                    <div id="player-controls">
+                        <button id="play-pause" class="player-button" aria-label="Tocar ou pausar"><i class="fas fa-play"></i></button>
+                        <button id="stop" class="player-button" aria-label="Parar"><i class="fas fa-stop"></i></button>
+                        <span class="volume-group">
+                            <i class="fas fa-volume-down" aria-hidden="true"></i>
+                            <input type="range" id="volume-slider" min="0" max="100" value="100" aria-label="Volume">
+                            <i class="fas fa-volume-up" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Instruções de Uso com Expansão -->
-        <section id="usage-instructions">
-            <div class="instructions-box">
-                <button id="toggle-instructions">Como o MixStation2™ Funciona? (Clique para expandir)</button>
-                <div id="instructions-content" style="display: none;">
-                    <p style="margin-bottom: 20px;">1 - Clique em uma rádio no menu de rádios disponíveis abaixo.</p>
-                    <p style="margin-bottom: 20px;">2 - Aguarde alguns segundos até que a música comece a tocar automaticamente no player.</p>
-                    <p style="margin-bottom: 20px;">3 - Você pode controlar o volume da música através do menu suspenso na lateral do app.</p>
-                    <p style="margin-bottom: 35px;">4 - Na parte inferior do app você encontra a seção de Salas do Avakin, basta clicar em uma que você será redirecionado para a sala correspondente no jogo.</p>
-                    <p><strong>Observações:</strong></p>
-                    <p style="margin-bottom: 20px;">
-                        - Se o rádio parar de tocar após algum tempo, é porquê seu dispositivo está com recursos como Economia de energia/bateria ativados. Se seu aparelho suporta navegador em janela pop-up com jogos abertos, ou possui recursos de "gametime", abra o site <a href="https://mixstation2.vercel.app" target="_blank" style="color: #00BFFF;">https://mixstation2.vercel.app</a> diretamente do navegador em pop-up.
-                    </p>
-                    <p>
-                        - Esse serviço é mantido exclusivamente por MaaxRadio, através das licenças GPL 3.0 e Creative Commons BY-NC. Se estiver sendo utilizado por outras entidades ou organizações: Reporte: <a href="https://mixstation2.vercel.app" target="_blank" style="color: #00BFFF;">Entre em contato.</a>
-                    </p>
-                </div>
-            </div>
-        </section>
+        <section id="radio-list" aria-label="Lista de rádios">
+            <section id="favorites-section" aria-label="Rádios favoritas" hidden>
+                <h3>⭐ Favoritas</h3>
+                <ul id="favorites-list" class="station-list"></ul>
+            </section>
 
-        <!-- Seção de Rádios Disponíveis -->
-        <section id="radio-list">
             <h3>Rádios Disponíveis</h3>
-            <input type="text" id="search-bar" placeholder="Pesquisar rádios">
+            <div class="toolbar">
+                <input type="text" id="search-bar" placeholder="Pesquisar rádios" aria-label="Pesquisar rádios">
+                <select id="genre-filter" aria-label="Filtrar por gênero">
+                    <option value="all">Todos os gêneros</option>
+                </select>
+                <button id="favorites-toggle" class="control-button" aria-label="Mostrar apenas favoritos" aria-pressed="false">
+                    <i class="fas fa-star"></i> Favoritos
+                </button>
+            </div>
             <ul id="stations" class="station-list"></ul>
-        </section>
-        
-        <!-- Seção de Links Diversos -->
-        <section id="additional-links">
-            <h3>Salas do Avakin: (em teste)</h3>
-            <ul id="links-list" class="links-list"></ul>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 MixStation2™ by MaaxRadio, todos os direitos reservados.</p>
+        <p>&copy; 2024 MixStation. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Menu de Controle de Volume -->
-    <div id="control-menu">
-        <button id="volume-up" class="control-button"><i class="fas fa-volume-up"></i></button>
-        <button id="volume-down" class="control-button"><i class="fas fa-volume-down"></i></button>
-        <button id="pause" class="control-button"><i class="fas fa-pause"></i></button>
-        <button id="stop-control" class="control-button"><i class="fas fa-stop"></i></button>
-        <button id="theme-toggle">🌙</button>
+    <div id="control-menu" role="group" aria-label="Controles rápidos">
+        <button id="volume-up" class="float-btn" aria-label="Aumentar volume"><i class="fas fa-volume-up"></i></button>
+        <button id="play-pause-floating" class="float-btn" aria-label="Pausar ou continuar"><i class="fas fa-play"></i></button>
+        <button id="volume-down" class="float-btn" aria-label="Diminuir volume"><i class="fas fa-volume-down"></i></button>
     </div>
 
-    <div id="volume-popup"></div>
+    <!-- Modo Direção -->
+    <div id="drive-mode" aria-hidden="true">
+        <div class="drive-orb drive-orb-1" aria-hidden="true"></div>
+        <div class="drive-orb drive-orb-2" aria-hidden="true"></div>
+
+        <div class="drive-header">
+            <button id="drive-exit" class="drive-exit" aria-label="Fechar modo direção"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="drive-clock">
+            <span id="drive-time">00:00</span>
+            <span id="drive-date">-</span>
+        </div>
+
+        <button id="drive-station" class="drive-now" aria-label="Escolher rádio">
+            <img id="drive-icon" src="" alt="" width="56" height="56">
+            <span id="drive-station-name">Nenhuma rádio</span>
+            <i class="fas fa-chevron-down drive-chev" aria-hidden="true"></i>
+        </button>
+
+        <div class="drive-controls">
+            <button id="drive-prev" class="drive-btn-big" aria-label="Rádio anterior"><i class="fas fa-step-backward"></i></button>
+            <button id="drive-play" class="drive-btn-big drive-play" aria-label="Pausar ou continuar"><i class="fas fa-play"></i></button>
+            <button id="drive-next" class="drive-btn-big" aria-label="Próxima rádio"><i class="fas fa-step-forward"></i></button>
+        </div>
+
+        <div class="drive-volume">
+            <button id="drive-vol-down" class="drive-btn-big" aria-label="Diminuir volume"><i class="fas fa-minus"></i></button>
+            <input type="range" id="drive-slider" min="0" max="100" value="100" aria-label="Volume no modo direção">
+            <button id="drive-vol-up" class="drive-btn-big" aria-label="Aumentar volume"><i class="fas fa-plus"></i></button>
+        </div>
+
+        <div class="drive-options">
+            <button id="drive-anim-btn" class="drive-toggle-btn" aria-pressed="false"><i class="fas fa-wand-magic-sparkles"></i> Animações</button>
+            <button id="drive-bw-btn" class="drive-toggle-btn" aria-pressed="false"><i class="fas fa-circle-half-stroke"></i> Preto e branco</button>
+        </div>
+
+        <div class="drive-toggle">
+            <span>Alternar entre:</span>
+            <button id="drive-toggle-list" class="drive-toggle-btn" aria-pressed="false">Todos</button>
+        </div>
+
+        <div id="drive-list-panel" class="drive-popup" role="dialog" aria-modal="true" aria-label="Escolher rádio" hidden>
+            <div class="drive-popup-sheet">
+                <div class="drive-popup-header">
+                    <span>Escolher rádio</span>
+                    <button type="button" id="drive-list-close" class="drive-popup-close" aria-label="Fechar lista"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="drive-popup-list" role="listbox"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="volume-popup" role="status" aria-live="polite"></div>
 
     <script src="stations.js"></script>
-    <script src="links.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
