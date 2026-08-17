@@ -1,49 +1,7 @@
-/* ==================== VARIÁVEIS GLOBAIS ==================== */
-:root {
-    /* Light Theme (Original) */
-    --background-gradient-light: linear-gradient(to right, 
-      #f4f9fc 0%,
-      #d2e3eed4 10%,
-      #cfe4f2 55%,
-      #d2e3ee 80%,
-      #d2e3ee 100%
-    );
-    --glass-bg-light: rgba(255, 255, 255, 0.39);
-    --glass-border-light: rgba(72, 98, 123, 0.13);
-    --text-color-light: #31383f;
-    --accent-color-light: #98b9cf;
-  
-    /* Dark Theme (Novo) */
-    --background-dark: #121212;
-    --glass-bg-dark: #1f1f1f;
-    --glass-border-dark: #333;
-    --text-color-dark: #ffffff;
-    --accent-color-dark: #ff5722;
-    --dark-gradient: linear-gradient(90deg, #0342b8, #0385b8, #8d12ff, #ff00aa, #ba55d3);
-  
-    /* Variáveis Dinâmicas */
-    --background: var(--background-gradient-light);
-    --glass-bg: var(--glass-bg-light);
-    --glass-border: var(--glass-border-light);
-    --text-color: var(--text-color-light);
-    --accent-color: var(--accent-color-light);
-    --hover-brightness: 1.05;
-}
-
-/* ==================== TEMA ESCURO ==================== */
-body.dark-theme {
-    --background: var(--background-dark);
-    --glass-bg: var(--glass-bg-dark);
-    --glass-border: var(--glass-border-dark);
-    --text-color: var(--text-color-dark);
-    --accent-color: var(--accent-color-dark);
-    --hover-brightness: 1.1;
-}
-
-/* ==================== ESTILOS BASE ==================== */
+/* Estilos gerais */
 body {
-    background: var(--background);
-    color: var(--text-color);
+    background-color: #121212;
+    color: #ffffff;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -54,31 +12,71 @@ body {
 }
 
 header {
-    padding: 0.4em;
-    text-align: center;
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    backdrop-filter: blur(20px);
-    margin-bottom: 20px;
-}
-
-/* Gradiente Animado (Apenas Dark Theme) */
-body.dark-theme header {
-    background: var(--dark-gradient);
+    background: linear-gradient(90deg, #0342b8, #0385b8, #8d12ff, #ff00aa, #ba55d3);
     background-size: 300% 300%;
     animation: gradientAnimation 20s ease infinite;
+    padding: 0.4em;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    position: sticky;
+    top: 0;
 }
 
 @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-/* ==================== COMPONENTES PRINCIPAIS ==================== */
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75em;
+    cursor: pointer;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.05;
+}
+
+.brand-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#current-radio {
+    font-size: 0.85em;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    max-width: 60vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 main {
     flex: 1;
     padding: 2em;
@@ -91,26 +89,24 @@ section {
     margin-bottom: 2em;
 }
 
-/* Elementos de Formulário */
 input, button {
     padding: 0.75em;
     margin-top: 0.5em;
-    background: var(--glass-bg);
-    color: var(--text-color);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(20px);
+    background-color: #333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     font-size: 1em;
 }
 
 button:hover {
-    transform: scale(var(--hover-brightness));
-    filter: brightness(1.15);
+    background-color: #555;
+    transform: scale(1.05);
 }
 
-/* Lista de Rádios */
-#stations {
+.station-list {
     list-style: none;
     padding: 0;
     display: grid;
@@ -118,67 +114,37 @@ button:hover {
     gap: 1em;
 }
 
-#stations li {
+.station-list li {
+    position: relative;
     padding: 1em;
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
+    border: 1px solid #333;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
+    transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-#stations li:hover {
-    transform: scale(var(--hover-brightness));
-    background: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-theme #stations li:hover {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-/* Player de Áudio */
-#player-container {
-    display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    background: var(--glass-bg);
-    padding: 2em;
-    border-radius: 15px;
-    transition: transform 0.3s;
-    border: 1px solid var(--glass-border);
+    background-color: #1f1f1f;
 }
 
-#player-container:hover {
-    transform: scale(1.02);
+.station-list li:hover {
+    background-color: #333;
+    transform: scale(1.03);
 }
 
-/* Controles do Player */
-.player-button, .control-button {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
+.station-list li.playing {
+    border-color: #8d12ff;
+    box-shadow: 0 0 0 2px rgba(141, 18, 255, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.player-button:hover, .control-button:hover {
-    color: var(--accent-color);
-    transform: scale(1.2);
-}
-
-/* ==================== ICONES E TEXTOS ==================== */
 .station-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 0.8em;
+    gap: 0.4em;
+    font-size: 20px; /* Tamanho da fonte do nome da rádio */
 }
 
 .station-info img {
@@ -186,70 +152,189 @@ body.dark-theme #stations li:hover {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 0.5em;
 }
 
-.station-info p {
-    font-size: 20px;
-    text-align: center;
+.station-genre {
+    font-size: 0.65em;
+    color: #8d12ff;
+    background-color: rgba(141, 18, 255, 0.15);
+    padding: 0.2em 0.7em;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+}
+
+.fav-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #ffd700;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0.3em;
     margin: 0;
-    line-height: 1.3;
-    padding: 0 10px;
+    box-shadow: none;
+    transition: transform 0.2s;
 }
 
-.link-info img {
-    width: 40px;
-    height: 40px;
+.fav-button:hover {
+    background: none;
+    transform: scale(1.25);
+}
+
+.fav-button.active i {
+    color: #ffd700;
+}
+
+.fav-button i {
+    color: #888;
+}
+
+.station-list li.empty {
+    cursor: default;
+    grid-column: 1 / -1;
+    color: #bbb;
+    font-size: 1.2em;
+}
+
+#player-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #1f1f1f;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+#player-container:hover {
+    transform: scale(1.02);
+}
+
+#player-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f1f1f;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#now-playing {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#now-playing img {
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 10px;
-    border: 2px solid var(--glass-border);
+    border: 2px solid #333;
+    display: none;
 }
 
-/* ==================== NOVOS COMPONENTES ==================== */
-.links-list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+#now-playing-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    min-width: 180px;
+}
+
+#now-playing-label {
+    font-size: 0.75em;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#current-station {
+    font-size: 1.1em;
+    color: #fff;
+}
+
+#player-controls {
+    display: flex;
+    align-items: center;
     gap: 1em;
 }
 
-.link-info {
+.player-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.6em;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.player-button:hover {
+    color: #ff5722;
+    transform: scale(1.2);
+}
+
+.volume-group {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--glass-border);
-    padding: 10px;
-    border-radius: 15px;
-    transition: all 0.3s;
-    backdrop-filter: blur(20px);
+    gap: 0.5em;
+    color: #bbb;
 }
 
-body.dark-theme .link-info {
-    background: rgba(25, 25, 25, 0.8);
-}
-
-.link-info:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-#toggle-instructions {
-    padding: 0.75em;
-    background-color: var(--accent-color);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+#volume-slider {
+    width: 120px;
+    margin: 0;
+    padding: 0;
+    background: #444;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    box-shadow: none;
 }
 
-#toggle-instructions:hover {
-    filter: brightness(1.15);
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #8d12ff;
+    cursor: pointer;
 }
 
-/* ==================== COMPONENTES COMPARTILHADOS ==================== */
+#volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #8d12ff;
+    cursor: pointer;
+    border: none;
+}
+
+footer {
+    background-color: #1f1f1f;
+    padding: 1em;
+    text-align: center;
+    border-top: 1px solid #333;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    color: #bbb;
+    font-size: 0.875em;
+}
+
+/* Estilos do Modal */
 .modal {
     display: none;
     position: fixed;
@@ -258,50 +343,1400 @@ body.dark-theme .link-info {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.75);
     align-items: center;
     justify-content: center;
 }
 
-body.dark-theme .modal {
-    background: rgba(0, 0, 0, 0.75);
-}
-
 .modal-content {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
+    background-color: #1f1f1f;
+    margin: auto;
     padding: 2em;
+    border: 1px solid #333;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s;
 }
 
-footer {
-    background: var(--glass-bg);
-    padding: 1em;
-    text-align: center;
-    border-top: 1px solid var(--glass-border);
-    margin-top: auto;
-    backdrop-filter: blur(20px);
+.close-button {
+    color: #bbb;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
+.close-button:hover {
+    color: #fff;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Toolbar de busca e filtros */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+#search-bar {
+    flex: 1;
+    min-width: 200px;
+}
+
+#genre-filter {
+    min-width: 160px;
+    cursor: pointer;
+}
+
+select#genre-filter {
+    padding: 0.75em;
+    background-color: #333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+select#genre-filter:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #8d12ff;
+    outline-offset: 2px;
+}
+
+/* Botão Favoritos (toolbar) */
+.control-button {
+    background-color: #333;
+    border: none;
+    color: #ffffff;
+    padding: 0.75em 1em;
+    margin: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em;
+}
+
+.control-button:hover {
+    background-color: #555;
+    transform: scale(1.03);
+}
+
+.control-button.active {
+    background-color: #4a2c8a;
+    color: #ffd700;
+}
+
+/* Popup / Toast de volume e avisos */
+#volume-popup {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display: none;
+    font-size: 1em;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #player-container {
+        padding: 1em;
+    }
+    #now-playing {
+        gap: 1em;
+    }
+    #volume-slider {
+        width: 90px;
+    }
+}
+
+/* ===== Painel flutuante lateral (vol + / - / play-pause) ===== */
 #control-menu {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    padding: 5px;
+    bottom: 16px;
+    right: 16px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    backdrop-filter: blur(20px);
+    gap: 8px;
+    padding: 8px;
+    background: rgba(31, 31, 31, 0.85);
+    backdrop-filter: blur(6px);
+    border: 1px solid #444;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    z-index: 900;
+    touch-action: manipulation;
 }
 
-/* ==================== ANIMAÇÕES ==================== */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.float-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.25em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.float-btn:hover {
+    background-color: #333;
+    color: #ff5722;
+    transform: scale(1.08);
+}
+
+.float-btn:focus-visible {
+    outline: 2px solid #8d12ff;
+    outline-offset: 2px;
+}
+
+.float-btn:active {
+    transform: scale(0.94);
+}
+
+#play-pause-floating.playing {
+    background-color: rgba(141, 18, 255, 0.35);
+    color: #ffd700;
+}
+
+/* ===== Indicador "tocando" nos cards ===== */
+.station-list li.playing::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4cff6a;
+    box-shadow: 0 0 0 0 rgba(76, 255, 106, 0.6);
+    animation: pulsePlaying 1.6s infinite;
+}
+
+@keyframes pulsePlaying {
+    0%   { box-shadow: 0 0 0 0 rgba(76, 255, 106, 0.6); }
+    100% { box-shadow: 0 0 0 14px rgba(76, 255, 106, 0); }
+}
+
+/* ===== UIX / acabamento ===== */
+section#radio-list > h3 {
+    color: #ddd;
+    font-size: 1.25em;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75em;
+}
+
+.station-list li {
+    transition: background-color 0.25s, transform 0.25s, border-color 0.25s;
+    will-change: transform;
+}
+
+.station-list li:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: #555;
+}
+
+.station-info p {
+    margin: 0;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Fallback visual quando a rádio não tem logo */
+.icon-fallback {
+    font-size: 3em;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+#now-playing .icon-fallback {
+    font-size: 2.6em;
+}
+
+input:not([type="range"]), select, .control-button {
+    min-height: 46px; /* área de toque confiável no mobile */
+}
+
+input[type="range"] {
+    min-height: 0;
+}
+
+:focus-visible {
+    outline: 2px solid #8d12ff;
+    outline-offset: 2px;
+}
+
+/* ===== Seção Favoritas (topo) ===== */
+#favorites-section {
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    padding: 1em 1em 0.25em;
+}
+
+#favorites-section h3 {
+    color: #ffd700;
+    margin: 0 0 0.75em;
+    font-size: 1.25em;
+    letter-spacing: 0.5px;
+}
+
+#favorites-section[hidden] {
+    display: none;
+}
+
+/* ============================================================
+   Temas (variáveis) + Glassmorphism
+   ============================================================ */
+:root {
+    --bg: #121212;
+    --text: #ffffff;
+    --text-dim: #bbb;
+    --surface: #1f1f1f;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-blur: 12px;
+    --accent: #8d12ff;
+    --grad1: #0342b8;
+    --grad2: #8d12ff;
+    --grad3: #ff00aa;
+    --orb1: #0342b8;
+    --orb2: #ff00aa;
+}
+
+body[data-theme="oceano"] {
+    --bg: #021621;
+    --accent: #00b4d8;
+    --grad1: #002f6c;
+    --grad2: #0077b6;
+    --grad3: #00b4d8;
+    --orb1: #0077b6;
+    --orb2: #00b4d8;
+}
+
+body[data-theme="floresta"] {
+    --bg: #04140c;
+    --accent: #3ddc84;
+    --grad1: #004d2a;
+    --grad2: #0a7d46;
+    --grad3: #3ddc84;
+    --orb1: #0a7d46;
+    --orb2: #3ddc84;
+}
+
+body[data-theme="neon"] {
+    --bg: #0c0618;
+    --accent: #ff007a;
+    --grad1: #7a00ff;
+    --grad2: #e5009b;
+    --grad3: #00f0ff;
+    --orb1: #e5009b;
+    --orb2: #00f0ff;
+}
+
+body {
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(circle at 15% 12%, var(--orb1) 0%, transparent 42%),
+        radial-gradient(circle at 88% 88%, var(--orb2) 0%, transparent 44%);
+    background-attachment: fixed;
+}
+
+/* Ajusta superfícies aos temas */
+.station-list li,
+#player-container,
+footer {
+    background-color: var(--surface);
+}
+
+header {
+    background: linear-gradient(90deg, var(--grad1), var(--grad2), var(--grad3));
+}
+
+/* Glassmorphism (com fallback sólido p/ navegadores antigos) */
+@supports (backdrop-filter: blur(var(--glass-blur))) or (-webkit-backdrop-filter: blur(var(--glass-blur))) {
+    .station-list li,
+    #player-container,
+    #control-menu {
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border-color: var(--glass-border);
+    }
+}
+
+/* ============================================================
+   Cabeçalho com ações (tema + modo direção)
+   ============================================================ */
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75em;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0.75em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-shrink: 0;
+}
+
+#theme-select {
+    padding: 0.55em 0.7em;
+    background-color: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.drive-dash-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.55em 0.9em;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9em;
+    box-shadow: none;
+    white-space: nowrap;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.drive-dash-btn:hover {
+    background-color: rgba(0, 0, 0, 0.55);
+    transform: scale(1.04);
+}
+
+@media (max-width: 600px) {
+    .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .drive-dash-btn span {
+        display: none; /* só o ícone no celular pequeno */
+    }
+}
+
+/* ============================================================
+   Tema PADRÃO clássico (sem glassmorphism) — abre por primeiro
+   ============================================================ */
+body[data-theme="default"],
+body:not([data-theme]) {
+    background-color: #121212;
+    background-image: none;
+    --surface: #1f1f1f;
+    --accent: #8d12ff;
+    --grad1: #0342b8;
+    --grad2: #8d12ff;
+    --grad3: #ff00aa;
+}
+
+/* Força superfícies sólidas no tema padrão (desfaz o glass) */
+body[data-theme="default"] .station-list li,
+body[data-theme="default"] #player-container,
+body[data-theme="default"] #control-menu,
+body:not([data-theme]) .station-list li,
+body:not([data-theme]) #player-container,
+body:not([data-theme]) #control-menu {
+    background-color: #1f1f1f !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: #333 !important;
+}
+
+/* ============================================================
+   MODO DIREÇÃO — vertical estilo celular (sem borda, espalhado)
+   ============================================================ */
+#drive-mode {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: #000;
+    background-image:
+        radial-gradient(circle at 18% 0%, rgba(141, 18, 255, 0.12), transparent 45%),
+        radial-gradient(circle at 85% 100%, rgba(255, 0, 170, 0.12), transparent 45%);
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: max(0.9em, env(safe-area-inset-top)) 1.2em calc(1.6em + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    overflow-y: auto;
+    gap: 1.1em;
+}
+
+#drive-mode.open {
+    display: flex;
+}
+
+/* Cabeçalho interno */
+.drive-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.drive-exit {
+    width: 46px;
+    height: 46px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 1.05em;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.drive-exit:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Relógio */
+.drive-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+    text-align: center;
+}
+
+#drive-time {
+    font-size: clamp(3.4rem, 16vw, 5.6rem);
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+#drive-date {
+    font-size: 1.05em;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: capitalize;
+}
+
+/* Nome da rádio (tocável) */
+.drive-now {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8em;
+    width: 100%;
+    margin: 0;
+    padding: 0.85em 1em;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    color: #fff;
+    font-size: 1.05em;
+    cursor: pointer;
+    box-shadow: none;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+.drive-now:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.drive-now:active {
+    transform: scale(0.98);
+}
+
+.drive-now img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: none;
+}
+
+.drive-now .icon-fallback {
+    font-size: 1.9em;
+}
+
+#drive-station-name {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.drive-chev {
+    color: rgba(255, 255, 255, 0.6);
+    transition: transform 0.2s;
+}
+
+.drive-now.open .drive-chev {
+    transform: rotate(180deg);
+}
+
+/* Controles grandes */
+.drive-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4em;
+}
+
+.drive-btn-big {
+    width: 74px;
+    height: 74px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s, background-color 0.2s;
+}
+
+.drive-btn-big:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: scale(1.05);
+}
+
+.drive-btn-big:active {
+    transform: scale(0.93);
+}
+
+.drive-play {
+    width: 92px;
+    height: 92px;
+    font-size: 1.9em;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.drive-play.playing {
+    color: #ffd700;
+    background: linear-gradient(135deg, #8d12ff, #ff00aa);
+    border-color: transparent;
+}
+
+/* Volume */
+.drive-volume {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    width: 100%;
+}
+
+.drive-volume .drive-btn-big {
+    width: 58px;
+    height: 58px;
+    font-size: 1.2em;
+}
+
+#drive-slider {
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.18);
+    outline: none;
+    cursor: pointer;
+    min-height: 0;
+}
+
+#drive-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+#drive-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+/* Alternar entre Todos / Favoritas */
+.drive-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    padding: 0.75em 1em;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95em;
+}
+
+.drive-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 0.5em 1.2em;
+    font-size: 0.95em;
+    cursor: pointer;
+    margin: 0;
+    box-shadow: none;
+    min-width: 96px;
+}
+
+.drive-toggle-btn[aria-pressed="true"] {
+    background: linear-gradient(135deg, #8d12ff, #ff00aa);
+    border-color: transparent;
+    color: #fff;
+}
+
+/* Painel de lista de rádios */
+.drive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-bottom: 0.3em;
+}
+
+.drive-list[hidden] {
+    display: none;
+}
+
+.drive-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    width: 100%;
+    margin: 0;
+    padding: 0.7em 0.9em;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 0.98em;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: none;
+    transition: background-color 0.2s;
+}
+
+.drive-list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.drive-list-item img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.drive-list-item .icon-fallback {
+    font-size: 1.6em;
+    width: 38px;
+    display: flex;
+    justify-content: center;
+}
+
+.drive-list-item span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.drive-list-item.current {
+    border-color: #8d12ff;
+    background: rgba(141, 18, 255, 0.15);
+}
+
+.drive-list-empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 1.2em;
+    font-size: 0.95em;
+}
+
+/* Em telas largas, limita a largura para conforto de leitura */
+@media (min-width: 760px) {
+    #drive-mode {
+        max-width: 620px;
+        margin: 0 auto;
+    }
+}
+
+/* ============================================================
+   Ajustes Modo Direção — tela cheia, tema, espaçamento
+   ============================================================ */
+/* Tema Pioneiro Dolphin */
+body[data-theme="pioneer"] {
+    --bg: #031523;
+    --accent: #22d3ee;
+    --grad1: #0077c8;
+    --grad2: #0affff;
+    --grad3: #0099ff;
+    --orb1: #0077c8;
+    --orb2: #38e3ff;
+}
+
+/* Cores do drive (seguem o tema do app) */
+:root,
+body:not([data-theme]),
+body[data-theme="default"] {
+    --drive-accent: #9aa5b1;   /* neutro */
+    --drive-accent2: #6b7280;
+}
+body[data-theme="oceano"] { --drive-accent: #22d3ee; --drive-accent2: #0ea5e9; }
+body[data-theme="floresta"] { --drive-accent: #34d399; --drive-accent2: #10b981; }
+body[data-theme="neon"] { --drive-accent: #f472b6; --drive-accent2: #a855f7; }
+body[data-theme="pioneer"] { --drive-accent: #38e3ff; --drive-accent2: #0077c8; }
+
+/* Modo direção preenche a tela inteira (sem caixa central no desktop) */
+@media (min-width: 760px) {
+    #drive-mode {
+        max-width: none;
+        margin: 0;
+    }
+}
+
+/* Mais espaço vertical entre os itens */
+#drive-mode {
+    gap: 1.5em;
+    padding: max(1.1em, env(safe-area-inset-top)) 1.5em calc(2.2em + env(safe-area-inset-bottom));
+    background-image: none; /* a cor vem das orbs */
+}
+
+.drive-clock {
+    margin-top: 0.4em;
+}
+
+.drive-now {
+    margin-top: 0.3em;
+}
+
+.drive-controls {
+    margin-top: 0.3em;
+}
+
+/* ============================================================
+   Orbs de fundo + animações + preto e branco (Modo Direção)
+   ============================================================ */
+.drive-orb {
+    position: fixed;
+    width: 56vmax;
+    height: 56vmax;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 0;
+    transition: background-color 0.5s;
+}
+
+.drive-orb-1 {
+    top: -16vmax;
+    left: -12vmax;
+    background: var(--drive-accent);
+}
+
+.drive-orb-2 {
+    bottom: -16vmax;
+    right: -12vmax;
+    background: var(--drive-accent2);
+}
+
+/* Conteúdo acima das orbs */
+#drive-mode > :not(.drive-orb) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animações de fundo (ligam com a classe anim-on) */
+#drive-mode.anim-on .drive-orb-1 {
+    animation: orbit1 18s ease-in-out infinite alternate;
+}
+
+#drive-mode.anim-on .drive-orb-2 {
+    animation: orbit2 24s ease-in-out infinite alternate;
+}
+
+@keyframes orbit1 {
+    to { transform: translate(16vw, 14vh) scale(1.12); }
+}
+
+@keyframes orbit2 {
+    to { transform: translate(-14vw, -12vh) scale(1.08); }
+}
+
+/* Transições de entrada/saída dos itens */
+#drive-mode.open > :not(.drive-orb) {
+    animation: driveFadeIn 0.35s ease both;
+}
+
+#drive-mode.open > :not(.drive-orb):nth-child(3) { animation-delay: 0.04s; }
+#drive-mode.open > :not(.drive-orb):nth-child(4) { animation-delay: 0.08s; }
+#drive-mode.open > :not(.drive-orb):nth-child(5) { animation-delay: 0.12s; }
+#drive-mode.open > :not(.drive-orb):nth-child(6) { animation-delay: 0.16s; }
+
+@keyframes driveFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Modo preto e branco (sem distrações, levemente escuro) */
+#drive-mode {
+    transition: filter 0.45s ease;
+}
+
+#drive-mode.bw {
+    filter: grayscale(1) brightness(0.72) contrast(1.05);
+}
+
+/* Barra de opções (Animações / Preto e branco) */
+.drive-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.7em;
+    width: 100%;
+}
+
+.drive-options .drive-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 12px;
+    padding: 0.55em 0.9em;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin: 0;
+    box-shadow: none;
+}
+
+.drive-options .drive-toggle-btn.on {
+    background: linear-gradient(135deg, var(--drive-accent2), var(--drive-accent));
+    border-color: transparent;
+    color: #000;
+}
+
+/* Acentos do drive seguem o tema (substitui rosa/roxo fixos) */
+.drive-play.playing {
+    background: linear-gradient(135deg, var(--drive-accent2), var(--drive-accent));
+    border-color: transparent;
+}
+
+.drive-toggle-btn[aria-pressed="true"] {
+    background: linear-gradient(135deg, var(--drive-accent2), var(--drive-accent));
+    border-color: transparent;
+    color: #000;
+}
+
+.drive-list-item.current {
+    border-color: var(--drive-accent);
+    background: rgba(130, 130, 130, 0.14);
+}
+
+.drive-arrow {
+    color: var(--drive-accent);
+}
+
+/* ============================================================
+   Correções (scrollbars no P&B, neutro total, espaçamento, lista)
+   ============================================================ */
+#drive-mode {
+    overflow-x: hidden; /* evita abas/scrollbars laterais */
+    gap: 2em;           /* mais espaço vertical entre os itens */
+}
+
+/* Preto e branco: completamente neutro, sem efeitos de fundo */
+#drive-mode.bw {
+    overflow: hidden;
+}
+
+#drive-mode.bw .drive-orb {
+    display: none; /* remove a fonte das scrollbars e o efeito de fundo */
+}
+
+#drive-mode.bw > * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Aumento de espaçamento vertical entre os itens */
+.drive-header {
+    margin-bottom: 0.2em;
+}
+
+.drive-clock {
+    margin: 0.5em 0 1.7em; /* mais respiro ao redor do relógio */
+}
+
+.drive-now {
+    padding: 1.05em;
+    margin-bottom: 0.5em;
+}
+
+.drive-controls,
+.drive-volume,
+.drive-options {
+    padding: 0.35em 0;
+    margin-bottom: 0.4em;
+}
+
+.drive-toggle {
+    padding: 0.95em 1.1em;
+}
+
+/* Animação de abertura: mantém nos blocos principais, SEM a lista */
+#drive-mode.open > :not(.drive-orb) {
+    animation: none;
+}
+
+#drive-mode.open > :not(.drive-orb):not(.drive-list) {
+    animation: driveFadeIn 0.35s ease both;
+}
+
+#drive-mode.open > :not(.drive-orb):not(.drive-list):nth-child(3) { animation-delay: 0.04s; }
+#drive-mode.open > :not(.drive-orb):not(.drive-list):nth-child(4) { animation-delay: 0.08s; }
+#drive-mode.open > :not(.drive-orb):not(.drive-list):nth-child(5) { animation-delay: 0.12s; }
+#drive-mode.open > :not(.drive-orb):not(.drive-list):nth-child(6) { animation-delay: 0.16s; }
+
+/* Sem animação ao selecionar uma rádio na lista */
+.drive-list,
+.drive-list-item {
+    animation: none !important;
+}
+
+.drive-list-item {
+    transition: none !important;
+}
+
+/* ============================================================
+   PACOTE DE ANIMAÇÕES DO MODO DIREÇÃO
+   (fundo, aurora, linhas, sheen, play pulse, slider, entrada)
+   ============================================================ */
+
+/* --- Orbs mais orgânicas --- */
+.drive-orb-1 {
+    background: radial-gradient(circle at 30% 30%, var(--drive-accent), transparent 70%);
+}
+.drive-orb-2 {
+    background: radial-gradient(circle at 70% 70%, var(--drive-accent2), transparent 70%);
+}
+
+#drive-mode.anim-on .drive-orb-1 {
+    animation: orbitA 22s ease-in-out infinite alternate;
+}
+#drive-mode.anim-on .drive-orb-2 {
+    animation: orbitB 26s ease-in-out infinite alternate;
+}
+@keyframes orbitA {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(10vw, -6vh) scale(1.15); }
+    100% { transform: translate(4vw, 12vh) scale(1.05); }
+}
+@keyframes orbitB {
+    0%   { transform: translate(0,0) scale(1.05); }
+    50%  { transform: translate(-8vw, 10vh) scale(0.95); }
+    100% { transform: translate(-14vw, -4vh) scale(1.12); }
+}
+
+/* --- Aurora de fundo (atrás do conteúdo) --- */
+#drive-mode::before {
+    content: '';
+    position: fixed;
+    inset: -22%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 28% 22%, var(--drive-accent) 0%, transparent 48%),
+        radial-gradient(ellipse at 74% 78%, var(--drive-accent2) 0%, transparent 48%);
+    filter: blur(70px);
+    opacity: 0.4;
+}
+#drive-mode.anim-on::before {
+    animation: aurora 18s ease-in-out infinite alternate;
+}
+@keyframes aurora {
+    0%   { transform: translate(0,0) scale(1); opacity: .35; }
+    50%  { opacity: .5; }
+    100% { transform: translate(-6%, 4%) scale(1.1); opacity: .42; }
+}
+
+/* --- Linhas de luz sutis --- */
+#drive-mode::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,0) 0px,
+        rgba(255,255,255,0) 46px,
+        rgba(255,255,255,0.05) 51px,
+        rgba(255,255,255,0) 57px
+    );
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    filter: blur(2px);
+}
+#drive-mode.anim-on::after {
+    animation: lightLines 18s linear infinite;
+}
+@keyframes lightLines {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 1160px; }
+}
+
+/* --- Sheen nos painéis principais --- */
+.drive-now,
+.drive-toggle,
+.drive-exit,
+.drive-btn-big {
+    position: relative;
+    overflow: hidden;
+}
+.drive-now::after,
+.drive-toggle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 42%;
+    left: -70%;
+    transform: skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+    pointer-events: none;
+}
+#drive-mode.anim-on .drive-now::after,
+#drive-mode.anim-on .drive-toggle::after {
+    animation: sheen 6.5s ease-in-out infinite;
+}
+@keyframes sheen {
+    0%        { left: -70%; }
+    55%, 100% { left: 140%; }
+}
+
+/* --- Glow de borda nos painéis (anim-on) --- */
+#drive-mode.anim-on .drive-now {
+    animation: panelGlow 6s ease-in-out infinite;
+}
+@keyframes panelGlow {
+    0%, 100% { border-color: rgba(255,255,255,0.12); box-shadow: 0 0 0 rgba(255,255,255,0); }
+    50%      { border-color: var(--drive-accent);     box-shadow: 0 0 22px rgba(255,255,255,0.08); }
+}
+
+/* --- Play: pulso/echo enquanto toca --- */
+.drive-play::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--drive-accent);
+    opacity: 0;
+    pointer-events: none;
+}
+.drive-play.playing::after {
+    animation: ripple 2.4s ease-out infinite;
+}
+@keyframes ripple {
+    0%   { transform: scale(1);   opacity: 0.7; }
+    100% { transform: scale(1.75); opacity: 0; }
+}
+
+/* --- Botões: mola no press + glow no hover --- */
+.drive-btn-big {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.drive-btn-big:hover {
+    box-shadow: 0 0 18px rgba(255,255,255,0.16);
+}
+.drive-btn-big:active {
+    transform: scale(0.86);
+}
+.drive-now:active {
+    transform: scale(0.98);
+}
+
+/* --- Slider: gradiente + thumb com glow --- */
+#drive-slider {
+    background: linear-gradient(90deg,
+        var(--drive-accent) var(--fill, 50%),
+        rgba(255,255,255,0.18) var(--fill, 50%));
+    transition: background 0.2s;
+}
+#drive-slider::-webkit-slider-thumb {
+    background: var(--drive-accent);
+    box-shadow: 0 0 10px var(--drive-accent);
+}
+#drive-slider::-moz-range-thumb {
+    background: var(--drive-accent);
+    box-shadow: 0 0 10px var(--drive-accent);
+}
+
+/* --- Entrada dos blocos principais (stagger + spring) --- */
+@keyframes driveFadeIn {
+    0%   { opacity: 0; transform: translateY(18px) scale(0.97); filter: blur(5px); }
+    100% { opacity: 1; transform: none; filter: blur(0); }
+}
+#drive-mode.open > :not(.drive-orb):not(.drive-list) {
+    animation: driveFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Relógio: respiração suave (anim-on) --- */
+#drive-mode.anim-on #drive-time {
+    animation: clockBreath 5s ease-in-out infinite;
+}
+@keyframes clockBreath {
+    0%, 100% { text-shadow: 0 0 8px rgba(255,255,255,0.08); opacity: 1; }
+    50%      { text-shadow: 0 0 26px rgba(255,255,255,0.35); opacity: 0.9; }
+}
+
+/* --- Neutro total: também desliga pseudos de fundo --- */
+#drive-mode.bw::before,
+#drive-mode.bw::after {
+    display: none;
+}
+#drive-mode.bw .drive-now::after,
+#drive-mode.bw .drive-toggle::after {
+    display: none;
+}
+#drive-mode.bw .drive-play.playing::after {
+    display: none;
+}
+
+/* ============================================================
+   SUAVIZAÇÃO — animações mais sutis, sem efeito no relógio
+   ============================================================ */
+/* Relógio sempre limpo */
+#drive-time,
+#drive-mode.anim-on #drive-time {
+    animation: none !important;
+    text-shadow: none;
+}
+
+/* Orbs mais discretas e movimento pequeno */
+.drive-orb {
+    opacity: 0.10;
+}
+@keyframes orbitA {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50%      { transform: translate(6vw, -4vh) scale(1.06); }
+}
+@keyframes orbitB {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50%      { transform: translate(-5vw, 5vh) scale(0.97); }
+}
+
+/* Aurora mais suave e lenta */
+#drive-mode::before {
+    opacity: 0.2;
+    filter: blur(95px);
+}
+#drive-mode.anim-on::before {
+    animation: auroraSoft 30s ease-in-out infinite alternate;
+}
+@keyframes auroraSoft {
+    0%, 100% { transform: none;                  opacity: 0.18; }
+    100%     { transform: translate(-2.5%, 1.5%); opacity: 0.24; }
+}
+
+/* Linhas de luz mais discretas */
+#drive-mode::after {
+    opacity: 0.26;
+}
+
+/* Sheen menos brilhante, com pausa */
+.drive-now::after,
+.drive-toggle::after {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+}
+@keyframes sheen {
+    0%        { left: -70%; }
+    70%, 100% { left: 140%; }
+}
+
+/* Glow de borda mais suave */
+@keyframes panelGlow {
+    0%, 100% { border-color: rgba(255,255,255,0.1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+    50%      { border-color: var(--drive-accent);   box-shadow: 0 0 14px rgba(255,255,255,0.05); }
+}
+
+/* Entrada mais suave (sem blur forte) */
+@keyframes driveFadeIn {
+    0%   { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: none; }
+}
+#drive-mode.open > :not(.drive-orb):not(.drive-list):not(.drive-popup) {
+    animation: driveFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ============================================================
+   POP-UP da lista de rádios (dentro do Modo Direção)
+   ============================================================ */
+.drive-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 60; /* acima do conteúdo do drive */
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.drive-popup[hidden] {
+    display: none;
+}
+
+.drive-popup.open {
+    display: flex;
+}
+
+.drive-popup-sheet {
+    width: 100%;
+    max-width: 720px;
+    height: 80vh;
+    max-height: 82vh;
+    background: #0d0f15;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    border-radius: 24px 24px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.drive-popup.open .drive-popup-sheet {
+    transform: none;
+}
+
+.drive-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 1em 1.2em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1.05em;
+}
+
+.drive-popup-close {
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.drive-popup-close:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.drive-popup-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.9em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55em;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Em telas largas, vira um modal centralizado */
+@media (min-width: 700px) {
+    .drive-popup {
+        align-items: center;
+    }
+    .drive-popup-sheet {
+        border-radius: 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        height: 78vh;
+        max-height: 80vh;
+        transform: translateY(14px) scale(0.98);
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s;
+    }
+    .drive-popup.open .drive-popup-sheet {
+        transform: none;
+        opacity: 1;
+    }
 }
