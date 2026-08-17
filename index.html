@@ -106,11 +106,6 @@
             <span id="drive-date">-</span>
         </div>
 
-        <button id="drive-station" class="drive-now" aria-label="Escolher rádio">
-            <img id="drive-icon" src="" alt="" width="56" height="56">
-            <span id="drive-station-name">Nenhuma rádio</span>
-            <i class="fas fa-chevron-down drive-chev" aria-hidden="true"></i>
-        </button>
 
         <div class="drive-controls">
             <button id="drive-prev" class="drive-btn-big" aria-label="Rádio anterior"><i class="fas fa-step-backward"></i></button>
@@ -124,14 +119,20 @@
             <button id="drive-vol-up" class="drive-btn-big" aria-label="Aumentar volume"><i class="fas fa-plus"></i></button>
         </div>
 
-        <div class="drive-options">
-            <button id="drive-anim-btn" class="drive-toggle-btn" aria-pressed="false"><i class="fas fa-wand-magic-sparkles"></i> Animações</button>
-            <button id="drive-bw-btn" class="drive-toggle-btn" aria-pressed="false"><i class="fas fa-circle-half-stroke"></i> Preto e branco</button>
-        </div>
-
+        <button id="drive-station" class="drive-now" aria-label="Escolher rádio">
+            <img id="drive-icon" src="" alt="" width="56" height="56">
+            <span id="drive-station-name">Nenhuma rádio</span>
+            <i class="fas fa-chevron-down drive-chev" aria-hidden="true"></i>
+        </button>
+        
         <div class="drive-toggle">
             <span>Alternar entre:</span>
             <button id="drive-toggle-list" class="drive-toggle-btn" aria-pressed="false">Todos</button>
+        </div>
+
+        <div class="drive-options">
+            <button id="drive-anim-btn" class="drive-toggle-btn" aria-pressed="false"><i class="fas fa-wand-magic-sparkles"></i> Animações</button>
+            <button id="drive-bw-btn" class="drive-toggle-btn" aria-pressed="false"><i class="fas fa-circle-half-stroke"></i> Preto e branco</button>
         </div>
 
         <div id="drive-list-panel" class="drive-popup" role="dialog" aria-modal="true" aria-label="Escolher rádio" hidden>
