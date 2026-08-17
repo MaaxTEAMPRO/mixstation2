@@ -968,7 +968,7 @@ body:not([data-theme]) #control-menu {
 }
 
 .drive-play.playing {
-    color: #ffd700;
+    color: #d3d3d0;
     background: linear-gradient(135deg, #8d12ff, #ff00aa);
     border-color: transparent;
 }
